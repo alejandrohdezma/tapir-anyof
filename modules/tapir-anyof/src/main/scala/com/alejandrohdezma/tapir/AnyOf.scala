@@ -25,6 +25,7 @@ import sttp.tapir.Mapping
 import sttp.tapir.Schema
 import sttp.tapir.SchemaType.SCoproduct
 import sttp.tapir.SchemaType.SDiscriminator
+import sttp.tapir.SchemaType.SchemaWithValue
 import sttp.tapir.oneOfVariantClassMatcher
 import sttp.tapir.oneOfVariantValueMatcher
 
@@ -212,7 +213,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
         case (statusCode, contexts) =>
           val schema = Schema[E](
             SCoproduct(contexts.map(_.schema), Some(SDiscriminator(discriminator, contexts.map(_.mapping).toMap))) {
-              e: E => contexts.find(_.isInstance(e)).map(_.schema)
+              e: E => contexts.find(_.isInstance(e)).map(err => SchemaWithValue(err.schema.asInstanceOf[Schema[E]], e))
             }
           )
 
