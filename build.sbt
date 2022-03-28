@@ -13,7 +13,7 @@ lazy val documentation = project
 
 lazy val `tapir-anyof` = module
   .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-core" % "0.20.1")
-  .settings(libraryDependencies += "com.chuusai" %% "shapeless" % "2.3.8")
+  .settings(libraryDependencies += "com.chuusai" %% "shapeless" % "2.3.9")
   .settings(libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.11" % Test)
   .settings(libraryDependencies += "com.alejandrohdezma" %% "http4s-munit" % "0.9.3" % Test)
   .settings(libraryDependencies += "io.circe" %% "circe-generic-extras" % "0.14.1" % Test)
