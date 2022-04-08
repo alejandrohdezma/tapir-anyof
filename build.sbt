@@ -1,6 +1,5 @@
 ThisBuild / scalaVersion  := "2.13.8"
 ThisBuild / organization  := "com.alejandrohdezma"
-ThisBuild / scalacOptions += "-Ymacro-annotations"
 
 addCommandAlias("ci-test", "fix --check; mdoc; test")
 addCommandAlias("ci-docs", "github; headerCreateAll; mdoc")
@@ -12,6 +11,7 @@ lazy val documentation = project
   .dependsOn(`tapir-anyof` % "compile->test")
 
 lazy val `tapir-anyof` = module
+  .settings(scalacOptions += "-Ymacro-annotations")
   .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-core" % "0.20.1")
   .settings(libraryDependencies += "com.chuusai" %% "shapeless" % "2.3.9")
   .settings(libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.11" % Test)
