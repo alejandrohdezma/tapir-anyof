@@ -8,6 +8,7 @@ addCommandAlias("ci-publish", "github; ci-release")
 lazy val documentation = project
   .enablePlugins(MdocPlugin)
   .settings(mdocOut := file("."))
+  .settings(scalacOptions += "-Ymacro-annotations")
   .dependsOn(`tapir-anyof` % "compile->test")
 
 lazy val `tapir-anyof` = module
