@@ -1,5 +1,5 @@
-ThisBuild / scalaVersion  := "2.13.8"
-ThisBuild / organization  := "com.alejandrohdezma"
+ThisBuild / scalaVersion := "2.13.8"
+ThisBuild / organization := "com.alejandrohdezma"
 
 addCommandAlias("ci-test", "fix --check; mdoc; test")
 addCommandAlias("ci-docs", "github; headerCreateAll; mdoc")
