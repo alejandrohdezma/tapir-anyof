@@ -50,7 +50,7 @@ package object tapir {
           val fieldName = FieldName(discriminatorName)
 
           val (subtypes, mappings) = sCoproduct.subtypes.flatMap {
-            case subSchema @ Schema(st: SProduct[A], Some(name), _, _, _, _, _, _, _) =>
+            case subSchema @ Schema(st: SProduct[A], Some(name), _, _, _, _, _, _, _, _, _) =>
               val discriminator  = nameToDiscriminator(name.fullName.split("\\.").last)
               val fieldValidator = Validator.enumeration(List(discriminator), Some(_: String))
               val fieldSchema    = Schema.schemaForString.validate(fieldValidator)
