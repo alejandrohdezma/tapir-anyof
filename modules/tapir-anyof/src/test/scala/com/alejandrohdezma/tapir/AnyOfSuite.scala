@@ -24,10 +24,10 @@ import io.circe.syntax._
 import munit.Http4sHttpRoutesSuite
 import org.http4s.HttpRoutes
 import org.http4s.circe._
+import sttp.apispec.openapi.circe.yaml._
 import sttp.tapir._
 import sttp.tapir.docs.openapi.OpenAPIDocsInterpreter
 import sttp.tapir.docs.openapi.OpenAPIDocsOptions
-import sttp.tapir.openapi.circe.yaml._
 import sttp.tapir.server.http4s.Http4sServerInterpreter
 
 class AnyOfSuite extends Http4sHttpRoutesSuite {
