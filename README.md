@@ -92,7 +92,7 @@ components:
 Add the following line to your `build.sbt` file:
 
 ```sbt
-libraryDependencies += "com.alejandrohdezma" %% "tapir-anyof" % "0.2.0")
+libraryDependencies += "com.alejandrohdezma" %% "tapir-anyof" % "0.3.0")
 ```
 
 ## Usage
@@ -191,7 +191,7 @@ import sttp.tapir.Schema
 final case class SimpleError(name: String)
 
 implicit val SimpleErrorSchema: Schema[SimpleError] = Schema.derived[SimpleError].addDiscriminator("error")
-// java.lang.RuntimeException: Schema must be of type SCoproduct but schema is SProduct(List(SProductField(FieldName(name,name),Schema(SString(),None,false,None,None,None,None,false,All(List())))))
+// java.lang.RuntimeException: Schema must be of type SCoproduct but schema is SProduct(List(SProductField(FieldName(name,name),Schema(SString(),None,false,None,None,None,None,false,false,All(List()),AttributeMap(Map())))))
 // 	at scala.sys.package$.error(package.scala:27)
 // 	at com.alejandrohdezma.tapir.package$SchemaDiscriminatorOps.addDiscriminator(package.scala:66)
 // 	at repl.MdocSession$App3$$anonfun$49.apply$mcV$sp(README.md:136)
