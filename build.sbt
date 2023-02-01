@@ -13,7 +13,7 @@ lazy val documentation = project
 
 lazy val `tapir-anyof` = module
   .settings(scalacOptions += "-Ymacro-annotations")
-  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.2.4")
+  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.2.7")
   .settings(libraryDependencies += "com.chuusai" %% "shapeless" % "2.3.10")
   .settings(libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.4.5" % Test)
   .settings(libraryDependencies += "com.alejandrohdezma" %% "http4s-munit" % "0.15.0" % Test)
