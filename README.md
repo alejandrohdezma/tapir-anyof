@@ -92,7 +92,7 @@ components:
 Add the following line to your `build.sbt` file:
 
 ```sbt
-libraryDependencies += "com.alejandrohdezma" %% "tapir-anyof" % "0.4.0")
+libraryDependencies += "com.alejandrohdezma" %% "tapir-anyof" % "0.5.0")
 ```
 
 ## Usage
@@ -114,7 +114,8 @@ case class WrongPassword(id: String) extends MyError
 
 object MyError {
 
-  implicit val config = Configuration.default.withDiscriminator("error")
+  implicit val config: Configuration =
+    Configuration.default.withDiscriminator("error")
 
 }
 ```
@@ -140,7 +141,8 @@ import sttp.model.StatusCode._
 
 object MyError {
 
-  implicit val config = Configuration.default.withDiscriminator("error")
+  implicit val config: Configuration =
+    Configuration.default.withDiscriminator("error")
 
   implicit lazy val MyErrorSchema: Schema[MyError] = Schema.derived[MyError]
 
@@ -166,7 +168,8 @@ import sttp.model.StatusCode._
 
 object MyError {
 
-  implicit val config = Configuration.default.withDiscriminator("error")
+  implicit val config: Configuration =
+    Configuration.default.withDiscriminator("error")
 
   implicit lazy val MyErrorSchema: Schema[MyError] = Schema.derived[MyError].addDiscriminator("error")
 
@@ -176,7 +179,8 @@ object MyError {
 > Note: if using a different discriminator than the class simple-name (for example, kebab-case) you can add a second parameter to `addDiscriminator` that lets you modify the class simple-name:
 >
 > ```scala mdoc:silent
-> implicit val config = Configuration.default.withDiscriminator("error").withKebabCaseConstructorNames
+> implicit val config: Configuration =
+>   Configuration.default.withDiscriminator("error").withKebabCaseConstructorNames
 >
 > implicit lazy val MyErrorSchema: Schema[MyError] =
 >   Schema.derived[MyError].addDiscriminator("error", config.transformConstructorNames)
@@ -194,9 +198,9 @@ implicit val SimpleErrorSchema: Schema[SimpleError] = Schema.derived[SimpleError
 // java.lang.RuntimeException: Schema must be of type SCoproduct but schema is SProduct(List(SProductField(FieldName(name,name),Schema(SString(),None,false,None,None,None,None,false,false,All(List()),AttributeMap(Map())))))
 // 	at scala.sys.package$.error(package.scala:27)
 // 	at com.alejandrohdezma.tapir.package$SchemaDiscriminatorOps.addDiscriminator(package.scala:66)
-// 	at repl.MdocSession$MdocApp3$$anonfun$49.apply$mcV$sp(README.md:136)
-// 	at repl.MdocSession$MdocApp3$$anonfun$49.apply(README.md:132)
-// 	at repl.MdocSession$MdocApp3$$anonfun$49.apply(README.md:132)
+// 	at repl.MdocSession$MdocApp3$$anonfun$49.apply$mcV$sp(README.md:139)
+// 	at repl.MdocSession$MdocApp3$$anonfun$49.apply(README.md:135)
+// 	at repl.MdocSession$MdocApp3$$anonfun$49.apply(README.md:135)
 ```
 
 ### Create your `anyOf` utility
