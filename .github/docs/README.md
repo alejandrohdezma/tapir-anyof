@@ -114,7 +114,8 @@ case class WrongPassword(id: String) extends MyError
 
 object MyError {
 
-  implicit val config = Configuration.default.withDiscriminator("error")
+  implicit val config: Configuration =
+    Configuration.default.withDiscriminator("error")
 
 }
 ```
@@ -140,7 +141,8 @@ import sttp.model.StatusCode._
 
 object MyError {
 
-  implicit val config = Configuration.default.withDiscriminator("error")
+  implicit val config: Configuration =
+    Configuration.default.withDiscriminator("error")
 
   implicit lazy val MyErrorSchema: Schema[MyError] = Schema.derived[MyError]
 
@@ -166,7 +168,8 @@ import sttp.model.StatusCode._
 
 object MyError {
 
-  implicit val config = Configuration.default.withDiscriminator("error")
+  implicit val config: Configuration =
+    Configuration.default.withDiscriminator("error")
 
   implicit lazy val MyErrorSchema: Schema[MyError] = Schema.derived[MyError].addDiscriminator("error")
 
@@ -176,7 +179,8 @@ object MyError {
 > Note: if using a different discriminator than the class simple-name (for example, kebab-case) you can add a second parameter to `addDiscriminator` that lets you modify the class simple-name:
 >
 > ```scala mdoc:silent
-> implicit val config = Configuration.default.withDiscriminator("error").withKebabCaseConstructorNames
+> implicit val config: Configuration =
+>   Configuration.default.withDiscriminator("error").withKebabCaseConstructorNames
 >
 > implicit lazy val MyErrorSchema: Schema[MyError] =
 >   Schema.derived[MyError].addDiscriminator("error", config.transformConstructorNames)
@@ -211,7 +215,8 @@ object MyError {
 
   import sttp.tapir.generic.auto._
 
-  implicit val config = Configuration.default.withDiscriminator("error")
+  implicit val config: Configuration =
+    Configuration.default.withDiscriminator("error")
 
   implicit lazy val MyErrorSchema: Schema[MyError] = Schema.derived[MyError].addDiscriminator("error")
 
