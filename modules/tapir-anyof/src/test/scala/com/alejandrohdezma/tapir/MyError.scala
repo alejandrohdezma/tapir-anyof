@@ -43,7 +43,8 @@ object anyOf extends AnyOf[MyError](jsonBody)
 
 object MyError {
 
-  implicit val configuration = Configuration.default.withDiscriminator("error").withKebabCaseConstructorNames
+  implicit val configuration: Configuration =
+    Configuration.default.withDiscriminator("error").withKebabCaseConstructorNames
 
   implicit lazy val MyErrorSchema: Schema[MyError] =
     Schema.derived[MyError].addDiscriminator("error", configuration.transformConstructorNames)
