@@ -67,7 +67,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
       .errorOut(anyOf[UserNotFound])
 
     val expected =
-      """openapi: 3.0.3
+      """openapi: 3.1.0
         |info:
         |  title: ''
         |  version: latest
@@ -119,7 +119,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
       .errorOut(anyOf[UserNotFound, WrongPassword, WrongUser])
 
     val expected =
-      """openapi: 3.0.3
+      """openapi: 3.1.0
         |info:
         |  title: ''
         |  version: latest
