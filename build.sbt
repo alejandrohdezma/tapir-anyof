@@ -21,7 +21,7 @@ lazy val `tapir-anyof` = module
   .settings(libraryDependencies += "org.http4s" %% "http4s-circe" % "0.23.24" % Test)
   .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-derevo" % "1.9.3" % Test)
   .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % "1.9.3" % Test)
-  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % "1.8.5" % Test)
+  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % "1.9.3" % Test)
   .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-openapi-docs" % "1.8.5" % Test)
   .settings(libraryDependencies += "com.softwaremill.sttp.apispec" %% "openapi-circe-yaml" % "0.7.3" % Test)
   .settings(addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.2" cross CrossVersion.full))
