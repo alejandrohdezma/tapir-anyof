@@ -193,7 +193,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
 
   private val discriminator = schema.schemaType match {
     case SCoproduct(_, Some(discriminator)) => discriminator.name
-    case SCoproduct(_, None)                => sys.error(s"Schema must contain a SDiscriminator")
+    case SCoproduct(_, None)                => sys.error("Schema must contain a SDiscriminator")
     case _                                  => sys.error(s"Schema must be of type SCoproduct but ${schema.show}")
   }
 

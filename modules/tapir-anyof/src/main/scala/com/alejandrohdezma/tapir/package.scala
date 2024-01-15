@@ -91,7 +91,7 @@ package object tapir {
         .getOrElse(sys.error(s"Unable to find schema for $name in $subtypes"))
 
       new ClassContext[A](tag, annotation.apply().code, discriminatorValue, schema)
-    case SCoproduct(_, None) => sys.error(s"Schema must contain a SDiscriminator")
+    case SCoproduct(_, None) => sys.error("Schema must contain a SDiscriminator")
     case _                   => sys.error(s"Schema must be of type SCoproduct but ${eSchema.show}")
   }
 
