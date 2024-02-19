@@ -25,7 +25,6 @@ import sttp.tapir._
 
 package object tapir {
 
-  @SuppressWarnings(Array("scalafix:DisableSyntax.defaultArgs"))
   implicit class SchemaDiscriminatorOps[A](schema: Schema[A]) {
 
     /** Adds a discriminator field to a `Schema` whose inner type is a `SCoproduct` schema type. This involves two
@@ -71,7 +70,7 @@ package object tapir {
 
   }
 
-  @SuppressWarnings(Array("scalafix:DisableSyntax.asInstanceOf", "scalafix:DisableSyntax.=="))
+  @SuppressWarnings(Array("scalafix:DisableSyntax.=="))
   private[tapir] def classContext[A <: E, E](implicit
       annotation: Annotation[code, A],
       tag: ClassTag[A],
