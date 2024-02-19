@@ -197,7 +197,6 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     case _                                  => sys.error(s"Schema must be of type SCoproduct but ${schema.show}")
   }
 
-  @SuppressWarnings(Array("scalafix:DisableSyntax.asInstanceOf"))
   private def anyOfImpl(contexts: ClassContext[_ <: E]*): EndpointOutput[E] = EndpointOutput.OneOf(
     contexts.toList
       .groupBy(_.statusCode)
