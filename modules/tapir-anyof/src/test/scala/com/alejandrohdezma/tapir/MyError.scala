@@ -21,6 +21,7 @@ import derevo.derive
 import io.circe.generic.extras.Configuration
 import io.circe.generic.extras.ConfiguredJsonCodec
 import sttp.model.StatusCode._
+import sttp.tapir.Schema.annotations.description
 import sttp.tapir._
 import sttp.tapir.derevo.schema
 import sttp.tapir.json.circe.jsonBody
@@ -29,14 +30,17 @@ import sttp.tapir.json.circe.jsonBody
 
 @code(NotFound)
 @derive(schema)
+@description("Unable to find user")
 final case class UserNotFound(name: String) extends MyError
 
 @code(Forbidden)
 @derive(schema)
+@description("Password is invalid")
 final case class WrongPassword(id: String) extends MyError
 
 @code(Forbidden)
 @derive(schema)
+@description("Username is invalid")
 final case class WrongUser(id: String) extends MyError
 
 object anyOfThese extends AnyOf[MyError](jsonBody)

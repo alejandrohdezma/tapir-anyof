@@ -216,7 +216,15 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
             }
           )
 
-          oneOfVariantValueMatcher(statusCode, endpointIO.copy(codec = endpointIO.codec.schema(schema))) { case any =>
+          val description = contexts.collect {
+            case context if context.schema.description.isDefined =>
+              s"On '${context.schema.name.get.fullName.split('.').last}': ${context.schema.description.get}"
+          }.mkString("\n")
+
+          oneOfVariantValueMatcher(
+            statusCode,
+            endpointIO.copy(codec = endpointIO.codec.schema(schema)).description(description)
+          ) { case any =>
             contexts.exists(_.isInstance(any))
           }
       },

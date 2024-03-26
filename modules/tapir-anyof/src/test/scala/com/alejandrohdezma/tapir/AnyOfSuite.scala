@@ -89,7 +89,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |              schema:
         |                type: string
         |        '404':
-        |          description: ''
+        |          description: Unable to find user
         |          content:
         |            application/json:
         |              schema:
@@ -108,7 +108,8 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |          type: integer
         |          format: int32
         |          enum:
-        |          - 1""".stripMargin
+        |          - 1
+        |      description: Unable to find user""".stripMargin
 
     assertNoDiff(toYaml(myEndpoint), expected)
   }
@@ -142,7 +143,9 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |              schema:
         |                type: string
         |        '403':
-        |          description: ''
+        |          description: |-
+        |            On 'WrongPassword': Password is invalid
+        |            On 'WrongUser': Username is invalid
         |          content:
         |            application/json:
         |              schema:
@@ -155,7 +158,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |                    '2': '#/components/schemas/WrongPassword'
         |                    '3': '#/components/schemas/WrongUser'
         |        '404':
-        |          description: ''
+        |          description: Unable to find user
         |          content:
         |            application/json:
         |              schema:
@@ -175,6 +178,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |          format: int32
         |          enum:
         |          - 1
+        |      description: Unable to find user
         |    WrongPassword:
         |      required:
         |      - id
@@ -188,6 +192,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |          format: int32
         |          enum:
         |          - 2
+        |      description: Password is invalid
         |    WrongUser:
         |      required:
         |      - id
@@ -200,7 +205,8 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |          type: integer
         |          format: int32
         |          enum:
-        |          - 3""".stripMargin
+        |          - 3
+        |      description: Username is invalid""".stripMargin
 
     assertNoDiff(toYaml(myEndpoint), expected)
   }
