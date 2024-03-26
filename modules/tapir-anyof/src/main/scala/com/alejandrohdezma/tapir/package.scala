@@ -43,7 +43,32 @@ package object tapir {
       *   the `Schema` with its type updated with the discriminator information.
       */
     @nowarn("msg=erasure")
-    def addDiscriminator(discriminatorName: String, nameToDiscriminator: String => String = identity): Schema[A] = {
+    def addDiscriminator(discriminatorName: String, nameToDiscriminator: String => String = identity): Schema[A] =
+      addDiscriminatorAs[String](discriminatorName, nameToDiscriminator)
+
+    /** Adds a discriminator field to a `Schema` whose inner type is a `SCoproduct` schema type. This involves two
+      * things:
+      *
+      *   - Adding the actual discriminator value to the `SCoproduct` itself.
+      *   - Adding the discriminator as a field to every subtype of the coproduct.
+      *
+      * @param discriminatorName
+      *   the name of the discriminator field.
+      * @param nameToDiscriminator
+      *   the method to transform a class simple name into a discriminator.
+      * @param discriminatorToString
+      *   the method to transform the discriminator into its string representation (required by Tapir)
+      * @throws java.lang.RuntimeException
+      *   if the schema's inner type is not a `SCoproduct`
+      * @return
+      *   the `Schema` with its type updated with the discriminator information.
+      */
+    @nowarn("msg=erasure")
+    def addDiscriminatorAs[B: Schema](
+        discriminatorName: String,
+        nameToDiscriminator: String => B,
+        discriminatorToString: B => String = (_: B).toString() // scalafix:ok
+    ): Schema[A] = {
       val schemaType = schema.schemaType match {
         case sCoproduct: SCoproduct[A] =>
           val fieldName = FieldName(discriminatorName)
@@ -51,11 +76,16 @@ package object tapir {
           val (subtypes, mappings) = sCoproduct.subtypes.flatMap {
             case subSchema @ Schema(st: SProduct[A], Some(name), _, _, _, _, _, _, _, _, _) =>
               val discriminator  = nameToDiscriminator(name.fullName.split("\\.").last)
-              val fieldValidator = Validator.enumeration(List(discriminator), Some(_: String))
-              val fieldSchema    = Schema.schemaForString.validate(fieldValidator)
-              val field          = SProductField[A, String](fieldName, fieldSchema, _ => None)
+              val fieldValidator = Validator.enumeration(List(discriminator), Some(_: B))
+              val fieldSchema    = implicitly[Schema[B]].validate(fieldValidator)
+              val field          = SProductField[A, B](fieldName, fieldSchema, _ => None)
 
-              List((subSchema.copy(schemaType = st.copy(fields = st.fields :+ field)), (discriminator, SRef(name))))
+              List(
+                (
+                  subSchema.copy(schemaType = st.copy(fields = st.fields :+ field)),
+                  (discriminatorToString(discriminator), SRef(name))
+                )
+              )
             case _ => Nil
           }.unzip
 

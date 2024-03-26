@@ -36,7 +36,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
     endpoint.get
       .in("v1" / "users" / path[String]("id"))
       .out(stringBody)
-      .errorOut(anyOf[UserNotFound, WrongPassword, WrongUser])
+      .errorOut(anyOfThese[UserNotFound, WrongPassword, WrongUser])
       .serverLogic[IO] {
         case "1" => IO(Left(UserNotFound("1")))
         case "2" => IO(Left(WrongPassword("2")))
@@ -64,7 +64,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
     val myEndpoint = endpoint.get
       .in("v1" / "users" / path[String]("id"))
       .out(stringBody)
-      .errorOut(anyOf[UserNotFound])
+      .errorOut(anyOfThese[UserNotFound])
 
     val expected =
       """openapi: 3.1.0
@@ -105,9 +105,10 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |        name:
         |          type: string
         |        error:
-        |          type: string
+        |          type: integer
+        |          format: int32
         |          enum:
-        |          - user-not-found""".stripMargin
+        |          - 1""".stripMargin
 
     assertNoDiff(toYaml(myEndpoint), expected)
   }
@@ -116,7 +117,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
     val myEndpoint = endpoint.get
       .in("v1" / "users" / path[String]("id"))
       .out(stringBody)
-      .errorOut(anyOf[UserNotFound, WrongPassword, WrongUser])
+      .errorOut(anyOfThese[UserNotFound, WrongPassword, WrongUser])
 
     val expected =
       """openapi: 3.1.0
@@ -151,8 +152,8 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |                discriminator:
         |                  propertyName: error
         |                  mapping:
-        |                    wrong-password: '#/components/schemas/WrongPassword'
-        |                    wrong-user: '#/components/schemas/WrongUser'
+        |                    '2': '#/components/schemas/WrongPassword'
+        |                    '3': '#/components/schemas/WrongUser'
         |        '404':
         |          description: ''
         |          content:
@@ -170,9 +171,10 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |        name:
         |          type: string
         |        error:
-        |          type: string
+        |          type: integer
+        |          format: int32
         |          enum:
-        |          - user-not-found
+        |          - 1
         |    WrongPassword:
         |      required:
         |      - id
@@ -182,9 +184,10 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |        id:
         |          type: string
         |        error:
-        |          type: string
+        |          type: integer
+        |          format: int32
         |          enum:
-        |          - wrong-password
+        |          - 2
         |    WrongUser:
         |      required:
         |      - id
@@ -194,9 +197,10 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |        id:
         |          type: string
         |        error:
-        |          type: string
+        |          type: integer
+        |          format: int32
         |          enum:
-        |          - wrong-user""".stripMargin
+        |          - 3""".stripMargin
 
     assertNoDiff(toYaml(myEndpoint), expected)
   }
