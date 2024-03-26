@@ -39,14 +39,20 @@ final case class WrongPassword(id: String) extends MyError
 @derive(schema)
 final case class WrongUser(id: String) extends MyError
 
-object anyOf extends AnyOf[MyError](jsonBody)
+object anyOfThese extends AnyOf[MyError](jsonBody)
 
 object MyError {
 
   implicit val configuration: Configuration =
     Configuration.default.withDiscriminator("error").withKebabCaseConstructorNames
 
+  val mapping: String => Int = {
+    case "UserNotFound"  => 1
+    case "WrongPassword" => 2
+    case "WrongUser"     => 3
+  }
+
   implicit lazy val MyErrorSchema: Schema[MyError] =
-    Schema.derived[MyError].addDiscriminator("error", configuration.transformConstructorNames)
+    Schema.derived[MyError].addDiscriminatorAs[Int]("error", mapping)
 
 }
