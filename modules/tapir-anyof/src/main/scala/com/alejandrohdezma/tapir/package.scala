@@ -42,7 +42,6 @@ package object tapir {
       * @return
       *   the `Schema` with its type updated with the discriminator information.
       */
-    @nowarn("msg=erasure")
     def addDiscriminator(discriminatorName: String, nameToDiscriminator: String => String = identity): Schema[A] =
       addDiscriminatorAs[String](discriminatorName, nameToDiscriminator)
 

@@ -97,6 +97,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |components:
         |  schemas:
         |    UserNotFound:
+        |      title: UserNotFound
         |      required:
         |      - name
         |      - error
@@ -166,6 +167,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |components:
         |  schemas:
         |    UserNotFound:
+        |      title: UserNotFound
         |      required:
         |      - name
         |      - error
@@ -180,6 +182,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |          - 1
         |      description: Unable to find user
         |    WrongPassword:
+        |      title: WrongPassword
         |      required:
         |      - id
         |      - error
@@ -194,6 +197,7 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |          - 2
         |      description: Password is invalid
         |    WrongUser:
+        |      title: WrongUser
         |      required:
         |      - id
         |      - error
