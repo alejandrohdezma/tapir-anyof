@@ -98,19 +98,19 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |  schemas:
         |    UserNotFound:
         |      title: UserNotFound
+        |      description: Unable to find user
+        |      type: object
         |      required:
         |      - name
         |      - error
-        |      type: object
         |      properties:
         |        name:
         |          type: string
         |        error:
         |          type: integer
-        |          format: int32
         |          enum:
         |          - 1
-        |      description: Unable to find user""".stripMargin
+        |          format: int32""".stripMargin
 
     assertNoDiff(toYaml(myEndpoint), expected)
   }
@@ -168,49 +168,49 @@ class AnyOfSuite extends Http4sHttpRoutesSuite {
         |  schemas:
         |    UserNotFound:
         |      title: UserNotFound
+        |      description: Unable to find user
+        |      type: object
         |      required:
         |      - name
         |      - error
-        |      type: object
         |      properties:
         |        name:
         |          type: string
         |        error:
         |          type: integer
-        |          format: int32
         |          enum:
         |          - 1
-        |      description: Unable to find user
+        |          format: int32
         |    WrongPassword:
         |      title: WrongPassword
+        |      description: Password is invalid
+        |      type: object
         |      required:
         |      - id
         |      - error
-        |      type: object
         |      properties:
         |        id:
         |          type: string
         |        error:
         |          type: integer
-        |          format: int32
         |          enum:
         |          - 2
-        |      description: Password is invalid
+        |          format: int32
         |    WrongUser:
         |      title: WrongUser
+        |      description: Username is invalid
+        |      type: object
         |      required:
         |      - id
         |      - error
-        |      type: object
         |      properties:
         |        id:
         |          type: string
         |        error:
         |          type: integer
-        |          format: int32
         |          enum:
         |          - 3
-        |      description: Username is invalid""".stripMargin
+        |          format: int32""".stripMargin
 
     assertNoDiff(toYaml(myEndpoint), expected)
   }
