@@ -92,7 +92,7 @@ components:
 Add the following line to your `build.sbt` file:
 
 ```sbt
-libraryDependencies += "com.alejandrohdezma" %% "tapir-anyof" % "0.7.0")
+libraryDependencies += "com.alejandrohdezma" %% "tapir-anyof" % "1.0.0")
 ```
 
 ## Usage
