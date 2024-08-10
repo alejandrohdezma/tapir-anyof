@@ -17,33 +17,36 @@
 package com.alejandrohdezma.tapir
 
 import cats.effect.IO
+import cats.effect.SyncIO
 
 import com.alejandrohdezma.tapir._
 import io.circe.Json
 import io.circe.syntax._
 import munit.Http4sHttpRoutesSuite
-import org.http4s.HttpRoutes
+import munit.Http4sSuite
 import org.http4s.circe._
+import org.http4s.client.Client
 import sttp.apispec.openapi.circe.yaml._
 import sttp.tapir._
 import sttp.tapir.docs.openapi.OpenAPIDocsInterpreter
 import sttp.tapir.docs.openapi.OpenAPIDocsOptions
 import sttp.tapir.server.http4s.Http4sServerInterpreter
 
-class AnyOfSuite extends Http4sHttpRoutesSuite {
+class AnyOfSuite extends Http4sSuite {
 
-  override val routes: HttpRoutes[IO] = Http4sServerInterpreter[IO]().toRoutes(
-    endpoint.get
-      .in("v1" / "users" / path[String]("id"))
-      .out(stringBody)
-      .errorOut(anyOfThese[UserNotFound, WrongPassword, WrongUser])
-      .serverLogic[IO] {
-        case "1" => IO(Left(UserNotFound("1")))
-        case "2" => IO(Left(WrongPassword("2")))
-        case "3" => IO(Left(WrongUser("3")))
-        case _   => fail("This should not be called")
-      }
-  )
+  override def http4sMUnitClientFixture: SyncIO[FunFixture[Client[IO]]] =
+    Http4sServerInterpreter[IO]().toRoutes {
+      endpoint.get
+        .in("v1" / "users" / path[String]("id"))
+        .out(stringBody)
+        .errorOut(anyOfThese[UserNotFound, WrongPassword, WrongUser])
+        .serverLogic[IO] {
+          case "1" => IO(Left(UserNotFound("1")))
+          case "2" => IO(Left(WrongPassword("2")))
+          case "3" => IO(Left(WrongUser("3")))
+          case _   => fail("This should not be called")
+        }
+    }.orFail.asFixture
 
   test(GET(uri"/v1/users/1")) { response =>
     assertEquals(response.status.code, 404)
