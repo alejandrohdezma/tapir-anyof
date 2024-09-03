@@ -31,3 +31,11 @@ import sttp.model.StatusCode
   *   }}}
   */
 final case class code(code: StatusCode) extends StaticAnnotation
+
+object code {
+
+  final case class Evidence[A](annotation: code)
+
+  object Evidence extends CodeEvidenceDerivation
+
+}

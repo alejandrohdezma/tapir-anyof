@@ -19,7 +19,6 @@ package com.alejandrohdezma
 import scala.annotation.nowarn
 import scala.reflect.ClassTag
 
-import shapeless.Annotation
 import sttp.tapir.SchemaType._
 import sttp.tapir._
 
@@ -101,7 +100,7 @@ package object tapir {
 
   @SuppressWarnings(Array("scalafix:DisableSyntax.=="))
   private[tapir] def classContext[A <: E, E](implicit
-      annotation: Annotation[code, A],
+      annotation: code.Evidence[A],
       tag: ClassTag[A],
       eSchema: Schema[E]
   ) = eSchema.schemaType match {
@@ -118,7 +117,7 @@ package object tapir {
         .map(_.asInstanceOf[Schema[A]])
         .getOrElse(sys.error(s"Unable to find schema for $name in $subtypes"))
 
-      new ClassContext[A](tag, annotation.apply().code, discriminatorValue, schema)
+      new ClassContext[A](tag, annotation.annotation.code, discriminatorValue, schema)
     case SCoproduct(_, None) => sys.error("Schema must contain a SDiscriminator")
     case _                   => sys.error(s"Schema must be of type SCoproduct but ${eSchema.show}")
   }
