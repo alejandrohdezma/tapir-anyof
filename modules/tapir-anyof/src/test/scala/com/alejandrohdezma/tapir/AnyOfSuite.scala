@@ -22,7 +22,6 @@ import cats.effect.SyncIO
 import com.alejandrohdezma.tapir._
 import io.circe.Json
 import io.circe.syntax._
-import munit.Http4sHttpRoutesSuite
 import munit.Http4sSuite
 import org.http4s.circe._
 import org.http4s.client.Client
@@ -37,7 +36,7 @@ class AnyOfSuite extends Http4sSuite {
   override def http4sMUnitClientFixture: SyncIO[FunFixture[Client[IO]]] =
     Http4sServerInterpreter[IO]().toRoutes {
       endpoint.get
-        .in("v1" / "users" / path[String]("id"))
+        .in("v1" / "users" / sttp.tapir.path[String]("id"))
         .out(stringBody)
         .errorOut(anyOfThese[UserNotFound, WrongPassword, WrongUser])
         .serverLogic[IO] {
@@ -65,7 +64,7 @@ class AnyOfSuite extends Http4sSuite {
 
   test("anyOf creates endpoint output with discriminator with only one error") {
     val myEndpoint = endpoint.get
-      .in("v1" / "users" / path[String]("id"))
+      .in("v1" / "users" / sttp.tapir.path[String]("id"))
       .out(stringBody)
       .errorOut(anyOfThese[UserNotFound])
 
@@ -120,7 +119,7 @@ class AnyOfSuite extends Http4sSuite {
 
   test("anyOf creates endpoint output with discriminator with multiple errors") {
     val myEndpoint = endpoint.get
-      .in("v1" / "users" / path[String]("id"))
+      .in("v1" / "users" / sttp.tapir.path[String]("id"))
       .out(stringBody)
       .errorOut(anyOfThese[UserNotFound, WrongPassword, WrongUser])
 

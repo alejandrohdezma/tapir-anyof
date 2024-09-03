@@ -17,29 +17,26 @@
 package com.alejandrohdezma.tapir
 
 import com.alejandrohdezma.tapir._
-import derevo.derive
-import io.circe.generic.extras.Configuration
-import io.circe.generic.extras.ConfiguredJsonCodec
+import io.circe.Decoder
+import io.circe.Encoder
+import io.circe.Json
+import io.circe.syntax._
 import sttp.model.StatusCode._
 import sttp.tapir.Schema.annotations.description
 import sttp.tapir._
-import sttp.tapir.derevo.schema
 import sttp.tapir.json.circe.jsonBody
 
-@ConfiguredJsonCodec sealed trait MyError extends Throwable
+sealed trait MyError extends Throwable
 
 @code(NotFound)
-@derive(schema)
 @description("Unable to find user")
 final case class UserNotFound(name: String) extends MyError
 
 @code(Forbidden)
-@derive(schema)
 @description("Password is invalid")
 final case class WrongPassword(id: String) extends MyError
 
 @code(Forbidden)
-@derive(schema)
 @description("Username is invalid")
 final case class WrongUser(id: String) extends MyError
 
@@ -47,8 +44,19 @@ object anyOfThese extends AnyOf[MyError](jsonBody)
 
 object MyError {
 
-  implicit val configuration: Configuration =
-    Configuration.default.withDiscriminator("error").withKebabCaseConstructorNames
+  implicit val MyErrorEncoder: Encoder[MyError] = Encoder.instance {
+    case UserNotFound(name) => Json.obj("name" := name, "error" := "user-not-found")
+    case WrongPassword(id)  => Json.obj("id" := id, "error" := "wrong-password")
+    case WrongUser(id)      => Json.obj("id" := id, "error" := "wrong-user")
+  }
+
+  implicit val MyErrorDecoder: Decoder[MyError] = Decoder.instance { cursor =>
+    cursor.downField("error").as[String].flatMap {
+      case "user-not-found" => Decoder.forProduct1("name")(UserNotFound.apply).apply(cursor)
+      case "wrong-password" => Decoder.forProduct1("id")(WrongPassword.apply).apply(cursor)
+      case "wrong-user"     => Decoder.forProduct1("id")(WrongUser.apply).apply(cursor)
+    }
+  }
 
   val mapping: String => Int = {
     case "UserNotFound"  => 1

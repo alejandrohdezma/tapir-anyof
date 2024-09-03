@@ -18,7 +18,6 @@ package com.alejandrohdezma.tapir
 
 import scala.reflect.ClassTag
 
-import shapeless.Annotation
 import sttp.tapir.EndpointIO
 import sttp.tapir.EndpointOutput
 import sttp.tapir.Mapping
@@ -74,7 +73,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -82,7 +81,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -90,7 +89,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -98,7 +97,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -106,7 +105,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag, E5 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag, E5 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E], classContext[E5, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -114,7 +113,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag, E5 <: E: Annotation[code, *]: ClassTag, E6 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag, E5 <: E: code.Evidence: ClassTag, E6 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E], classContext[E5, E], classContext[E6, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -122,7 +121,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag, E5 <: E: Annotation[code, *]: ClassTag, E6 <: E: Annotation[code, *]: ClassTag, E7 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag, E5 <: E: code.Evidence: ClassTag, E6 <: E: code.Evidence: ClassTag, E7 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E], classContext[E5, E], classContext[E6, E], classContext[E7, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -130,7 +129,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag, E5 <: E: Annotation[code, *]: ClassTag, E6 <: E: Annotation[code, *]: ClassTag, E7 <: E: Annotation[code, *]: ClassTag, E8 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag, E5 <: E: code.Evidence: ClassTag, E6 <: E: code.Evidence: ClassTag, E7 <: E: code.Evidence: ClassTag, E8 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E], classContext[E5, E], classContext[E6, E], classContext[E7, E], classContext[E8, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -138,7 +137,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag, E5 <: E: Annotation[code, *]: ClassTag, E6 <: E: Annotation[code, *]: ClassTag, E7 <: E: Annotation[code, *]: ClassTag, E8 <: E: Annotation[code, *]: ClassTag, E9 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag, E5 <: E: code.Evidence: ClassTag, E6 <: E: code.Evidence: ClassTag, E7 <: E: code.Evidence: ClassTag, E8 <: E: code.Evidence: ClassTag, E9 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E], classContext[E5, E], classContext[E6, E], classContext[E7, E], classContext[E8, E], classContext[E9, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -146,7 +145,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag, E5 <: E: Annotation[code, *]: ClassTag, E6 <: E: Annotation[code, *]: ClassTag, E7 <: E: Annotation[code, *]: ClassTag, E8 <: E: Annotation[code, *]: ClassTag, E9 <: E: Annotation[code, *]: ClassTag, E10 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag, E5 <: E: code.Evidence: ClassTag, E6 <: E: code.Evidence: ClassTag, E7 <: E: code.Evidence: ClassTag, E8 <: E: code.Evidence: ClassTag, E9 <: E: code.Evidence: ClassTag, E10 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E], classContext[E5, E], classContext[E6, E], classContext[E7, E], classContext[E8, E], classContext[E9, E], classContext[E10, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -154,7 +153,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag, E5 <: E: Annotation[code, *]: ClassTag, E6 <: E: Annotation[code, *]: ClassTag, E7 <: E: Annotation[code, *]: ClassTag, E8 <: E: Annotation[code, *]: ClassTag, E9 <: E: Annotation[code, *]: ClassTag, E10 <: E: Annotation[code, *]: ClassTag, E11 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag, E5 <: E: code.Evidence: ClassTag, E6 <: E: code.Evidence: ClassTag, E7 <: E: code.Evidence: ClassTag, E8 <: E: code.Evidence: ClassTag, E9 <: E: code.Evidence: ClassTag, E10 <: E: code.Evidence: ClassTag, E11 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E], classContext[E5, E], classContext[E6, E], classContext[E7, E], classContext[E8, E], classContext[E9, E], classContext[E10, E], classContext[E11, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -162,7 +161,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag, E5 <: E: Annotation[code, *]: ClassTag, E6 <: E: Annotation[code, *]: ClassTag, E7 <: E: Annotation[code, *]: ClassTag, E8 <: E: Annotation[code, *]: ClassTag, E9 <: E: Annotation[code, *]: ClassTag, E10 <: E: Annotation[code, *]: ClassTag, E11 <: E: Annotation[code, *]: ClassTag, E12 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag, E5 <: E: code.Evidence: ClassTag, E6 <: E: code.Evidence: ClassTag, E7 <: E: code.Evidence: ClassTag, E8 <: E: code.Evidence: ClassTag, E9 <: E: code.Evidence: ClassTag, E10 <: E: code.Evidence: ClassTag, E11 <: E: code.Evidence: ClassTag, E12 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E], classContext[E5, E], classContext[E6, E], classContext[E7, E], classContext[E8, E], classContext[E9, E], classContext[E10, E], classContext[E11, E], classContext[E12, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -170,7 +169,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag, E5 <: E: Annotation[code, *]: ClassTag, E6 <: E: Annotation[code, *]: ClassTag, E7 <: E: Annotation[code, *]: ClassTag, E8 <: E: Annotation[code, *]: ClassTag, E9 <: E: Annotation[code, *]: ClassTag, E10 <: E: Annotation[code, *]: ClassTag, E11 <: E: Annotation[code, *]: ClassTag, E12 <: E: Annotation[code, *]: ClassTag, E13 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag, E5 <: E: code.Evidence: ClassTag, E6 <: E: code.Evidence: ClassTag, E7 <: E: code.Evidence: ClassTag, E8 <: E: code.Evidence: ClassTag, E9 <: E: code.Evidence: ClassTag, E10 <: E: code.Evidence: ClassTag, E11 <: E: code.Evidence: ClassTag, E12 <: E: code.Evidence: ClassTag, E13 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E], classContext[E5, E], classContext[E6, E], classContext[E7, E], classContext[E8, E], classContext[E9, E], classContext[E10, E], classContext[E11, E], classContext[E12, E], classContext[E13, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -178,7 +177,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag, E5 <: E: Annotation[code, *]: ClassTag, E6 <: E: Annotation[code, *]: ClassTag, E7 <: E: Annotation[code, *]: ClassTag, E8 <: E: Annotation[code, *]: ClassTag, E9 <: E: Annotation[code, *]: ClassTag, E10 <: E: Annotation[code, *]: ClassTag, E11 <: E: Annotation[code, *]: ClassTag, E12 <: E: Annotation[code, *]: ClassTag, E13 <: E: Annotation[code, *]: ClassTag, E14 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag, E5 <: E: code.Evidence: ClassTag, E6 <: E: code.Evidence: ClassTag, E7 <: E: code.Evidence: ClassTag, E8 <: E: code.Evidence: ClassTag, E9 <: E: code.Evidence: ClassTag, E10 <: E: code.Evidence: ClassTag, E11 <: E: code.Evidence: ClassTag, E12 <: E: code.Evidence: ClassTag, E13 <: E: code.Evidence: ClassTag, E14 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E], classContext[E5, E], classContext[E6, E], classContext[E7, E], classContext[E8, E], classContext[E9, E], classContext[E10, E], classContext[E11, E], classContext[E12, E], classContext[E13, E], classContext[E14, E])
 
   /** Creates an `EndpointOutput` with multiple errors per status-code. 
@@ -186,7 +185,7 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
     * @throws java.lang.RuntimeException
     *   if the super-type schema is not a `SCoproduct` with a valid discriminator.
     */
-  def apply[E1 <: E: Annotation[code, *]: ClassTag, E2 <: E: Annotation[code, *]: ClassTag, E3 <: E: Annotation[code, *]: ClassTag, E4 <: E: Annotation[code, *]: ClassTag, E5 <: E: Annotation[code, *]: ClassTag, E6 <: E: Annotation[code, *]: ClassTag, E7 <: E: Annotation[code, *]: ClassTag, E8 <: E: Annotation[code, *]: ClassTag, E9 <: E: Annotation[code, *]: ClassTag, E10 <: E: Annotation[code, *]: ClassTag, E11 <: E: Annotation[code, *]: ClassTag, E12 <: E: Annotation[code, *]: ClassTag, E13 <: E: Annotation[code, *]: ClassTag, E14 <: E: Annotation[code, *]: ClassTag, E15 <: E: Annotation[code, *]: ClassTag]: EndpointOutput[E] =
+  def apply[E1 <: E: code.Evidence: ClassTag, E2 <: E: code.Evidence: ClassTag, E3 <: E: code.Evidence: ClassTag, E4 <: E: code.Evidence: ClassTag, E5 <: E: code.Evidence: ClassTag, E6 <: E: code.Evidence: ClassTag, E7 <: E: code.Evidence: ClassTag, E8 <: E: code.Evidence: ClassTag, E9 <: E: code.Evidence: ClassTag, E10 <: E: code.Evidence: ClassTag, E11 <: E: code.Evidence: ClassTag, E12 <: E: code.Evidence: ClassTag, E13 <: E: code.Evidence: ClassTag, E14 <: E: code.Evidence: ClassTag, E15 <: E: code.Evidence: ClassTag]: EndpointOutput[E] =
     anyOfImpl(classContext[E1, E], classContext[E2, E], classContext[E3, E], classContext[E4, E], classContext[E5, E], classContext[E6, E], classContext[E7, E], classContext[E8, E], classContext[E9, E], classContext[E10, E], classContext[E11, E], classContext[E12, E], classContext[E13, E], classContext[E14, E], classContext[E15, E])
 
   // format: on
@@ -212,7 +211,8 @@ class AnyOf[E](endpointIO: EndpointIO.Body[String, E])(implicit schema: Schema[E
         case (statusCode, contexts) =>
           val schema = Schema[E](
             SCoproduct(contexts.map(_.schema), Some(SDiscriminator(discriminator, contexts.map(_.mapping).toMap))) {
-              e: E => contexts.find(_.isInstance(e)).map(err => SchemaWithValue(err.schema.asInstanceOf[Schema[E]], e))
+              (e: E) =>
+                contexts.find(_.isInstance(e)).map(err => SchemaWithValue(err.schema.asInstanceOf[Schema[E]], e))
             }
           )
 
