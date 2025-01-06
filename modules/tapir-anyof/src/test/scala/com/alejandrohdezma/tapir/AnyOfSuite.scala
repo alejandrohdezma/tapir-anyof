@@ -19,7 +19,6 @@ package com.alejandrohdezma.tapir
 import cats.effect.IO
 import cats.effect.SyncIO
 
-import com.alejandrohdezma.tapir._
 import io.circe.Json
 import io.circe.syntax._
 import munit.Http4sSuite
