@@ -16,7 +16,7 @@ lazy val documentation = project
 
 lazy val `tapir-anyof` = module
   .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.11.16")
-  .settings(libraryDependencies ++= scalaVersion.value.on(2)("com.chuusai" %% "shapeless" % "2.3.12"))
+  .settings(libraryDependencies ++= scalaVersion.value.on(2)("com.chuusai" %% "shapeless" % "2.3.13"))
   .settings(libraryDependencies ++= scalaVersion.value.on(3)("org.typelevel" %% "shapeless3-deriving" % "3.4.3"))
   .settings(libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.5.17" % Test)
   .settings(libraryDependencies += "com.alejandrohdezma" %% "http4s-munit" % "1.1.0" % Test)
