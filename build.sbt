@@ -1,5 +1,5 @@
-ThisBuild / scalaVersion           := "2.13.16"
-ThisBuild / crossScalaVersions     := Seq("2.13.16", "3.3.6")
+ThisBuild / scalaVersion           := "2.13.18"
+ThisBuild / crossScalaVersions     := Seq("2.13.18", "3.3.7")
 ThisBuild / organization           := "com.alejandrohdezma"
 ThisBuild / versionPolicyIntention := Compatibility.BinaryCompatible
 
@@ -15,16 +15,16 @@ lazy val documentation = project
   .dependsOn(`tapir-anyof` % "compile->test")
 
 lazy val `tapir-anyof` = module
-  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.11.42")
+  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.11.50")
   .settings(libraryDependencies ++= scalaVersion.value.on(2)("com.chuusai" %% "shapeless" % "2.3.13"))
   .settings(libraryDependencies ++= scalaVersion.value.on(3)("org.typelevel" %% "shapeless3-deriving" % "3.5.0"))
-  .settings(libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.5.18" % Test)
+  .settings(libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.5.26" % Test)
   .settings(libraryDependencies += "com.alejandrohdezma" %% "http4s-munit" % "1.1.0" % Test)
-  .settings(libraryDependencies += "org.http4s" %% "http4s-circe" % "0.23.30" % Test)
-  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % "1.11.42" % Test)
-  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % "1.11.42" % Test)
-  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-openapi-docs" % "1.11.42" % Test)
+  .settings(libraryDependencies += "org.http4s" %% "http4s-circe" % "0.23.33" % Test)
+  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % "1.11.50" % Test)
+  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % "1.11.50" % Test)
+  .settings(libraryDependencies += "com.softwaremill.sttp.tapir" %% "tapir-openapi-docs" % "1.11.50" % Test)
   .settings(libraryDependencies += "com.softwaremill.sttp.apispec" %% "openapi-circe-yaml" % "0.11.10" % Test)
   .settings(libraryDependencies ++= scalaVersion.value.on(2)(kindProjector))
 
-def kindProjector = compilerPlugin("org.typelevel" %% "kind-projector" % "0.13.3").cross(CrossVersion.full)
+def kindProjector = compilerPlugin("org.typelevel" %% "kind-projector" % "0.13.4").cross(CrossVersion.full)
