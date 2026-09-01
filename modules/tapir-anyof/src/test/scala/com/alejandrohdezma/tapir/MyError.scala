@@ -18,6 +18,7 @@ package com.alejandrohdezma.tapir
 
 import com.alejandrohdezma.tapir._
 import io.circe.Decoder
+import io.circe.DecodingFailure
 import io.circe.Encoder
 import io.circe.Json
 import io.circe.syntax._
@@ -55,6 +56,7 @@ object MyError {
       case "user-not-found" => Decoder.forProduct1("name")(UserNotFound.apply).apply(cursor)
       case "wrong-password" => Decoder.forProduct1("id")(WrongPassword.apply).apply(cursor)
       case "wrong-user"     => Decoder.forProduct1("id")(WrongUser.apply).apply(cursor)
+      case other            => Left(DecodingFailure(s"Unknown error: $other", cursor.history))
     }
   }
 
@@ -62,6 +64,7 @@ object MyError {
     case "UserNotFound"  => 1
     case "WrongPassword" => 2
     case "WrongUser"     => 3
+    case other           => sys.error(s"Unknown error: $other")
   }
 
   implicit lazy val MyErrorSchema: Schema[MyError] =
