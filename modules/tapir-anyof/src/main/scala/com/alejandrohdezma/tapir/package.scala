@@ -16,7 +16,6 @@
 
 package com.alejandrohdezma
 
-import scala.annotation.nowarn
 import scala.reflect.ClassTag
 
 import sttp.tapir.SchemaType._
@@ -61,7 +60,6 @@ package object tapir {
       * @return
       *   the `Schema` with its type updated with the discriminator information.
       */
-    @nowarn("msg=erasure")
     def addDiscriminatorAs[B: Schema](
         discriminatorName: String,
         nameToDiscriminator: String => B,
@@ -72,7 +70,7 @@ package object tapir {
           val fieldName = FieldName(discriminatorName)
 
           val (subtypes, mappings) = sCoproduct.subtypes.flatMap {
-            case subSchema @ Schema(st: SProduct[A], Some(name), _, _, _, _, _, _, _, _, _) =>
+            case subSchema @ Schema(st: SProduct[A] @unchecked, Some(name), _, _, _, _, _, _, _, _, _) =>
               val discriminator  = nameToDiscriminator(name.fullName.split("\\.").last)
               val fieldValidator = Validator.enumeration(List(discriminator), Some(_: B))
               val fieldSchema    = implicitly[Schema[B]].validate(fieldValidator)
