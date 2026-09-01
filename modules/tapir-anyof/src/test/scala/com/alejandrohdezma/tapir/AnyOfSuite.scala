@@ -17,7 +17,7 @@
 package com.alejandrohdezma.tapir
 
 import cats.effect.IO
-import cats.effect.SyncIO
+import cats.effect.Resource
 
 import io.circe.Json
 import io.circe.syntax._
@@ -32,7 +32,7 @@ import sttp.tapir.server.http4s.Http4sServerInterpreter
 
 class AnyOfSuite extends Http4sSuite {
 
-  override def http4sMUnitClientFixture: SyncIO[FunFixture[Client[IO]]] =
+  override def http4sMUnitClientResource: Resource[IO, Client[IO]] =
     Http4sServerInterpreter[IO]().toRoutes {
       endpoint.get
         .in("v1" / "users" / sttp.tapir.path[String]("id"))
@@ -44,7 +44,7 @@ class AnyOfSuite extends Http4sSuite {
           case "3" => IO(Left(WrongUser("3")))
           case _   => fail("This should not be called")
         }
-    }.orFail.asFixture
+    }.orFail.asClient
 
   test(GET(uri"/v1/users/1")) { response =>
     assertEquals(response.status.code, 404)
