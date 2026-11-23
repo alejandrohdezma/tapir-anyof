@@ -92,7 +92,7 @@ components:
 Add the following line to your `build.sbt` file:
 
 ```sbt
-libraryDependencies += "com.alejandrohdezma" %% "tapir-anyof" % "2.0.0")
+libraryDependencies += "com.alejandrohdezma" %% "tapir-anyof" % "2.2.0")
 ```
 
 ## Usage
@@ -197,11 +197,11 @@ final case class SimpleError(name: String)
 implicit val SimpleErrorSchema: Schema[SimpleError] = Schema.derived[SimpleError].addDiscriminator("error")
 // java.lang.RuntimeException: Schema must be of type SCoproduct but schema is SProduct(List(SProductField(FieldName(name,name),Schema(SString(),None,false,None,None,None,None,false,false,All(List()),AttributeMap(Map())))))
 // 	at scala.sys.package$.error(package.scala:27)
-// 	at com.alejandrohdezma.tapir.package$SchemaDiscriminatorOps.addDiscriminatorAs(package.scala:93)
-// 	at com.alejandrohdezma.tapir.package$SchemaDiscriminatorOps.addDiscriminator(package.scala:45)
-// 	at repl.MdocSession$MdocApp3$$anonfun$31.apply$mcV$sp(README.md:139)
-// 	at repl.MdocSession$MdocApp3$$anonfun$31.apply(README.md:135)
-// 	at repl.MdocSession$MdocApp3$$anonfun$31.apply(README.md:135)
+// 	at com.alejandrohdezma.tapir.package$SchemaDiscriminatorOps.addDiscriminatorAs(package.scala:91)
+// 	at com.alejandrohdezma.tapir.package$SchemaDiscriminatorOps.addDiscriminator(package.scala:44)
+// 	at repl.MdocSession$MdocApp3$$anonfun$33.apply$mcV$sp(README.md:139)
+// 	at repl.MdocSession$MdocApp3$$anonfun$33.apply(README.md:135)
+// 	at repl.MdocSession$MdocApp3$$anonfun$33.apply(README.md:135)
 ```
 
 ### Create your `anyOf` utility
